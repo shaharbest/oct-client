@@ -12,12 +12,23 @@ export default function Catalog() {
 
   const productsCards =
     products.slice(firstIndex, secondIndex)
-    .map(p => <ProductCard key={p.id} product={p} />);
+      .map(p => <ProductCard key={p.id} product={p} />);
 
   return <>
     <div className="catalog-board">
       {productsCards}
     </div>
+    <CatalogPagesLinks selectedPageNum={curPageNum}
+      products={products}/>
   </>;
 }
 
+function CatalogPagesLinks({ selectedPageNum, products }) {
+  // should implement this Component
+
+  return <div className="pages-links">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+  </div>;
+}
