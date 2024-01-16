@@ -19,16 +19,23 @@ export default function Catalog() {
       {productsCards}
     </div>
     <CatalogPagesLinks selectedPageNum={curPageNum}
-      products={products}/>
+      products={products} onPageBtnClick={num => setCurPageNum(num)} />
   </>;
 }
 
-function CatalogPagesLinks({ selectedPageNum, products }) {
-  // should implement this Component
+function CatalogPagesLinks({ selectedPageNum, products, onPageBtnClick }) {
+  const pagesCount = Math.ceil(products.length / itemsPerPage);
+  const pagesBtns = [];
+
+  for (let i = 0; i < pagesCount; i++) {
+    pagesBtns.push(<button key={i}
+      style={{ backgroundColor: (i + 1 === selectedPageNum) ? 'red' : '' }}
+      onClick={() => onPageBtnClick(i + 1)}>
+      {i + 1}
+    </button>);
+  }
 
   return <div className="pages-links">
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
+    {pagesBtns}
   </div>;
 }
