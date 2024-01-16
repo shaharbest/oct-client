@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import PageLinkBtn from "./PageLinkBtn";
 
 export default function CatalogPagesLinks({ selectedPageNum,
   onPageBtnClick, pagesCount }) {
@@ -12,13 +12,4 @@ export default function CatalogPagesLinks({ selectedPageNum,
   return <div className="pages-links">
     {pagesBtns}
   </div>;
-}
-
-function PageLinkBtn({ pageNum, onPageBtnClick, isSelected }) {
-  const buttonStyle = { backgroundColor: isSelected ? 'red' : '' };
-
-  return <button style={buttonStyle}
-    onClick={() => onPageBtnClick(pageNum)}>
-    {pageNum}
-  </button>;
 }

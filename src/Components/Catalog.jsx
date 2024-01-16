@@ -14,9 +14,7 @@ export default function Catalog() {
 
   const productsCards =
     products.slice(firstIndex, secondIndex)
-      .map((p) => {
-        return <ProductCard key={p.id} product={p} />
-      });
+      .map(p => <ProductCard key={p.id} product={p} />);
 
   return <>
     <div className="catalog-board">
