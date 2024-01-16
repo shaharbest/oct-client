@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { products } from "../products";
 import ProductCard from "./ProductCard";
+import CatalogPagesLinks from "./CatalogPagesLinks";
 
 const itemsPerPage = 6;
+const pagesCount = Math.ceil(products.length / itemsPerPage);
 
 export default function Catalog() {
   const [curPageNum, setCurPageNum] = useState(1);
@@ -12,30 +14,16 @@ export default function Catalog() {
 
   const productsCards =
     products.slice(firstIndex, secondIndex)
-      .map(p => <ProductCard key={p.id} product={p} />);
+      .map((p) => {
+        return <ProductCard key={p.id} product={p} />
+      });
 
   return <>
     <div className="catalog-board">
       {productsCards}
     </div>
     <CatalogPagesLinks selectedPageNum={curPageNum}
-      products={products} onPageBtnClick={num => setCurPageNum(num)} />
+      onPageBtnClick={num => setCurPageNum(num)}
+      pagesCount={pagesCount} />
   </>;
-}
-
-function CatalogPagesLinks({ selectedPageNum, products, onPageBtnClick }) {
-  const pagesCount = Math.ceil(products.length / itemsPerPage);
-  const pagesBtns = [];
-
-  for (let i = 0; i < pagesCount; i++) {
-    pagesBtns.push(<button key={i}
-      style={{ backgroundColor: (i + 1 === selectedPageNum) ? 'red' : '' }}
-      onClick={() => onPageBtnClick(i + 1)}>
-      {i + 1}
-    </button>);
-  }
-
-  return <div className="pages-links">
-    {pagesBtns}
-  </div>;
 }
