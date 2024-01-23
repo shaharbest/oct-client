@@ -3,6 +3,7 @@ import Home from "./Components/Home";
 import Catalog from "./Components/Catalog";
 import ProductPage from "./Components/ProductPage";
 import Navbar from "./Components/Navbar";
+import LocalSorageDemo from "./Components/LocalStorageDemo";
 
 export default function App() {
   return <>
@@ -11,6 +12,7 @@ export default function App() {
       <Route path='/' element={<Home />} />
       <Route path='/products' element={<Catalog />} />
       <Route path='/products/:id' element={<ProductPage />} />
+      <Route path='/storage' element={<LocalSorageDemo />} />
     </Routes>
   </>;
 }
