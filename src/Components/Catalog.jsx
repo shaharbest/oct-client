@@ -9,33 +9,27 @@ export default function Catalog() {
   const [searchedProducts, setSearchedProducts] = useState(products);
   const [curPageNum, setCurPageNum] = useState(1);
 
-  function handleSearch(str) {
-    const result = products.filter(p =>
+  function handleSearch(str, sortCategory) {
+    const filteredList = products.filter(p =>
       p.name.includes(str));
-    setSearchedProducts(result);
-  }
 
-  function handleSort(category) {
-    const productsClone = [...products];
-
-    switch (category) {
+    switch (sortCategory) {
       case 'name':
-        productsClone.sort((p1, p2) => p1.name.localeCompare(p2.name));
+        filteredList.sort((p1, p2) => p1.name.localeCompare(p2.name));
         break;
       case 'price':
-        productsClone.sort((p1, p2) => p1.price - p2.price);
+        filteredList.sort((p1, p2) => p1.price - p2.price);
         break;
     }
 
-    setSearchedProducts(productsClone);
+    setSearchedProducts(filteredList);
+    setCurPageNum(1);
   }
 
   const pagesCount = Math.ceil(searchedProducts.length / itemsPerPage);
 
   return <>
-    <CatalogControls
-      handleSort={handleSort}
-      handleSearch={handleSearch} />
+    <CatalogControls handleSearch={handleSearch} />
     <CatalogBoard products={searchedProducts} curPageNum={curPageNum} />
     <CatalogPagesLinks selectedPageNum={curPageNum}
       onPageBtnClick={num => setCurPageNum(num)}
